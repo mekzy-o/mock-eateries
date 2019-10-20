@@ -2,12 +2,18 @@
  * @module app
  * @desc Manages the express configuration settings for the application.
  * @requires express
+ * @requires bodyParser
+ * @requires logger
+ * @requires morgan
  */
 import express from 'express';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
+import logger from './logger';
+
 
 const app = express();
+
 
 app.use(morgan('tiny'));
 app.use(bodyParser.json());
@@ -17,7 +23,7 @@ app.get('/', (req, res) => res.status(301).redirect('/api/v1'));
 
 app.get('/api/v1', (req, res) => res.status(200).send({
   message: 'Welcome to Quick-Credit version 1',
-}),);
+}));
 
 // Throw error when user enters wrong Endpoints
 app.use((req, res) => res.status(404).send({
@@ -27,7 +33,10 @@ app.use((req, res) => res.status(404).send({
 const port = process.env.PORT || 8080;
 
 app.listen(port, () => {
-  console.log(`Server is live on PORT: ${port}`);
+  logger.log({
+    level: 'info',
+    message: `Server is live on PORT: ${port}`,
+  });
 });
 
 export default app;
