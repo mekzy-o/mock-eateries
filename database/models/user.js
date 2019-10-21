@@ -22,8 +22,20 @@ module.exports = (sequelize, DataTypes) => {
     },
     {},
   );
-  User.associate = function (models) {
+  User.associate = (models) => {
     // associations can be defined here
+    User.hasMany(models.Categories, {
+      foreignKey: 'createdBy',
+      as: 'categories',
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
+    });
+    User.hasMany(models.Recipes, {
+      foreignKey: 'createdBy',
+      as: 'recipes',
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
+    });
   };
   return User;
 };
