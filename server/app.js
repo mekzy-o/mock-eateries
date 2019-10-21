@@ -9,21 +9,27 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
+import passport from 'passport';
 import logger from './logger';
+import routes from '../routes';
+// import ServerResponse from './modules';
+import models from '../database/models';
 
+require('../middlewares/Authentication');
 
 const app = express();
-
+const { sequelize } = models;
 
 app.use(morgan('tiny'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(passport.initialize());
 
-app.get('/', (req, res) => res.status(301).redirect('/api/v1'));
-
-app.get('/api/v1', (req, res) => res.status(200).send({
-  message: 'Welcome to Quick-Credit version 1',
+app.get('/', (req, res) => res.status(200).send({
+  message: 'Welcome to Mock Eatery',
 }));
+
+app.use('/api/v1', routes);
 
 // Throw error when user enters wrong Endpoints
 app.use((req, res) => res.status(404).send({
