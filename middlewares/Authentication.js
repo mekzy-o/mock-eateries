@@ -1,5 +1,6 @@
 /* eslint-disable new-cap */
 import jwt from 'jsonwebtoken';
+import passport from 'passport';
 import { config } from 'dotenv';
 import ServerResponse from '../utils/responseHandler';
 
@@ -49,7 +50,7 @@ export default class Authentication {
   }
 
   /**
-   * Checks for admin or super-admin
+   * Checks for admin
    *
    * @static
    *
@@ -67,5 +68,31 @@ export default class Authentication {
       return errorResponse(res, 403, { message: 'User not authorized' });
     }
     return next();
+  }
+
+  /**
+   * Checks for User's Token
+   *
+   * @static
+   *
+   * @param {object} req
+   * @param {object} res
+   * @param {function} next
+   *
+   * @returns {function} next function
+   *
+   * @memberof Authentication
+   */
+  static async passportJWT(req, res, next) {
+    passport.authenticate('jwt', (err, user, info) => {
+      if (err) return next(err);
+      if (!user) {
+        return errorResponse(res, 401, {
+          message: 'You are not authorized to access this route',
+        });
+      }
+      req.user = user;
+      next();
+    })(req, res, next);
   }
 }
