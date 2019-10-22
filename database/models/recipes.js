@@ -23,18 +23,18 @@ module.exports = (sequelize, DataTypes) => {
   );
   Recipes.associate = (models) => {
     // associations can be defined here
-    Recipes.belongsTo(models.Users, {
-      foreignKey: 'createdBy',
-      as: 'user',
-      onDelete: 'CASCADE',
-      onUpdate: 'CASCADE',
-    });
-    Recipes.belongsTo(models.Categories, {
-      foreignKey: 'category',
-      as: 'categoryName',
-      onDelete: 'CASCADE',
-      onUpdate: 'CASCADE',
-    });
+    // Recipes.belongsTo(models.Users, {
+    //   foreignKey: 'createdBy',
+    //   as: 'user',
+    //   onDelete: 'CASCADE',
+    //   onUpdate: 'CASCADE',
+    // });
+    // Recipes.belongsTo(models.Categories, {
+    //   foreignKey: 'category',
+    //   as: 'categories',
+    //   onDelete: 'CASCADE',
+    //   onUpdate: 'CASCADE',
+    // });
   };
   return Recipes;
 };
