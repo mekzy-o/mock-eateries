@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         type: DataTypes.STRING,
       },
-      username: {
+      name: {
         allowNull: false,
         type: DataTypes.STRING,
       },
@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
     // associations can be defined here
     User.hasMany(models.Categories, {
       foreignKey: 'createdBy',
-      as: 'categories',
+      as: 'usercategories',
       onDelete: 'CASCADE',
       onUpdate: 'CASCADE',
     });

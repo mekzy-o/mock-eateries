@@ -1,6 +1,7 @@
 import jwt, { verify } from 'jsonwebtoken';
 import { hashSync, compareSync } from 'bcryptjs';
 import { config } from 'dotenv';
+import { Categories } from '../database/models';
 
 config();
 
@@ -45,6 +46,10 @@ class Helper {
    */
   static comparePassword(password, hashPassword) {
     return compareSync(password, hashPassword);
+  }
+
+  static updateCategory(categoryName, id, description) {
+    return Categories.update({ categoryName, description }, { where: { id } });
   }
 }
 

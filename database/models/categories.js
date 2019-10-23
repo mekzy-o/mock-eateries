@@ -9,14 +9,14 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
     createdBy: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.UUID,
       allowNull: false,
     },
   }, {});
   Categories.associate = (models) => {
     // associations can be defined here
     Categories.hasMany(models.Recipes, {
-      foreignKey: 'category',
+      foreignKey: 'categoryId',
       as: 'recipes',
       onDelete: 'CASCADE',
       onUpdate: 'CASCADE',

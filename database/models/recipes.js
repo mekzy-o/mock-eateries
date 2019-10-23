@@ -2,20 +2,25 @@ module.exports = (sequelize, DataTypes) => {
   const Recipes = sequelize.define(
     'Recipes',
     {
-      category: {
-        type: DataTypes.INTEGER,
+      categoryId: {
+        type: DataTypes.UUID,
         allowNull: false,
       },
       recipeName: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      Ingredients: {
-        type: DataTypes.ARRAY(DataTypes.STRING),
-        defaultValue: [],
+      ingredients: {
+        type: DataTypes.STRING,
+        get() {
+          return JSON.parse(this.getDataValue('ingredients'));
+        },
+        set(val) {
+          return this.setDataValue('ingredients', JSON.stringify(val));
+        },
       },
       createdBy: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
         allowNull: false,
       },
     },

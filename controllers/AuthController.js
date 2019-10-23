@@ -28,21 +28,21 @@ export default class AuthController {
    */
   static async registerUSer(req, res, next) {
     try {
-      const { username, email, password } = req.body;
+      const { name, email, password } = req.body;
       const foundUser = await User.findOne({ where: { email } });
       if (foundUser) {
         return errorResponse(res, 409, { message: 'This User already exist' });
       }
       const hashedPassword = Helper.hashPassword(password);
       const user = {
-        username,
+        name,
         email,
         password: hashedPassword,
       };
       const createUser = await User.create(user);
       const token = Helper.createToken({
         id: createUser.id,
-        username: createUser.username,
+        name: createUser.name,
         email: createUser.email,
         isAdmin: createUser.isAdmin,
       });
@@ -77,12 +77,12 @@ export default class AuthController {
       }
 
       const {
-        id, username, email: emailAddress, isAdmin,
+        id, name, email: emailAddress, isAdmin,
       } = user.dataValues;
 
       const token = Helper.createToken({
         id,
-        username,
+        name,
         email: emailAddress,
         isAdmin,
       });

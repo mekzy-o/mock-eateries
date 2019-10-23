@@ -8,7 +8,9 @@
     "start": "node build/app.js",
     "start:dev": "nodemon --exec babel-node server/app.js",
     "migrate": "sequelize db:migrate",
-    "migrate:undo": "sequelize db:migrate:undo:all"
+    "migrate:undo": "sequelize db:migrate:undo:all",
+    "seedall": "sequelize db:seed:all",
+    "reset:db": "npm run migrate:undo && npm run migrate && npm run seedall"
   },
   "repository": {
     "type": "git",
@@ -39,6 +41,7 @@
     "regenerator-runtime": "^0.13.3",
     "sequelize": "^5.21.1",
     "sequelize-cli": "^5.5.1",
+    "uuid": "^3.3.3",
     "winston": "^3.2.1"
   },
   "devDependencies": {
