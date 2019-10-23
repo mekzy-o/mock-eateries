@@ -12,8 +12,7 @@ import morgan from 'morgan';
 import passport from 'passport';
 import logger from './logger';
 import routes from '../routes';
-// import ServerResponse from './modules';
-import models from '../database/models';
+import session, { rateLimiter } from '../utils/rateLimiter';
 import passportAuth from '../middlewares/passport';
 
 const app = express();
@@ -22,6 +21,8 @@ app.use(morgan('tiny'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(passport.initialize());
+app.use(session());
+app.use(rateLimiter);
 
 app.get('/', (req, res) => res.status(200).send({
   message: 'Welcome to Mock Eatery',
