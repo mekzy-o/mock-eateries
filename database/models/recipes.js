@@ -34,12 +34,12 @@ module.exports = (sequelize, DataTypes) => {
     //   onDelete: 'CASCADE',
     //   onUpdate: 'CASCADE',
     // });
-    // Recipes.belongsTo(models.Categories, {
-    //   foreignKey: 'category',
-    //   as: 'categories',
-    //   onDelete: 'CASCADE',
-    //   onUpdate: 'CASCADE',
-    // });
+    Recipes.belongsTo(models.Categories, {
+      foreignKey: 'categoryId',
+      as: 'categories',
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
+    });
   };
   return Recipes;
 };

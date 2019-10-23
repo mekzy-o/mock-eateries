@@ -1,0 +1,20 @@
+{
+    "addons": [
+      "heroku-postgresql"
+    ],
+    "buildpacks": [],
+    "env": {
+      "SECRET_KEY": {
+        "required": true
+      },
+      "NPM_CONFIG_PRODUCTION": {
+        "required": true
+      }
+    },
+    "formation": {},
+    "name": "mock-eateries",
+    "scripts": {
+      "postdeploy": "npx sequelize-cli db:seed:all"
+    },
+    "stack": "heroku-18"
+  }
