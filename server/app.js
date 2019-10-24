@@ -12,9 +12,9 @@ import bodyParser from 'body-parser';
 import morgan from 'morgan';
 import passport from 'passport';
 import logger from './logger';
-import routes from '../routes';
-import session, { rateLimiter } from '../utils/rateLimiter';
-import passportAuth from '../middlewares/passport';
+import routes from './routes';
+import session, { rateLimiter } from './utils/rateLimiter';
+import passportAuth from './middlewares/passport';
 
 const app = express();
 
