@@ -11,7 +11,7 @@ config();
 
 const { errorResponse } = ServerResponse;
 const redisCache = connectRedis(session);
-const client = redis.createClient();
+const client = redis.createClient(process.env.REDIS_URL);
 
 client.on('connect', () => {
   console.log('Redis client has connected successfully');
@@ -58,8 +58,6 @@ export default () => session({
   genid: (req) => uuid(),
   // eslint-disable-next-line new-cap
   store: new redisCache({
-    host: process.env.REDIS_HOST,
-    port: process.env.REDIS_PORT,
     client,
   }),
   name: 'mock-eatery',

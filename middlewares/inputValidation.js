@@ -18,7 +18,7 @@ const validate = {
       .isLength({ min: 3, max: 15 })
       .withMessage('name must be between 3 to 15 characters')
       .matches((/^[a-z]{1,}[\s]{0,1}[-']{0,1}[a-z]+$/i))
-      .withMessage('username can only contain letters'),
+      .withMessage('name can only contain letters'),
     check('password')
       .not()
       .isEmpty({ ignore_whitespace: true })
