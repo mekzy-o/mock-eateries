@@ -28,12 +28,6 @@ module.exports = (sequelize, DataTypes) => {
   );
   Recipes.associate = (models) => {
     // associations can be defined here
-    // Recipes.belongsTo(models.Users, {
-    //   foreignKey: 'createdBy',
-    //   as: 'user',
-    //   onDelete: 'CASCADE',
-    //   onUpdate: 'CASCADE',
-    // });
     Recipes.belongsTo(models.Categories, {
       foreignKey: 'categoryId',
       as: 'categories',

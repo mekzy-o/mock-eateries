@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import RecipeController from '../controllers/RecipeController';
+import CartController from '../controllers/CartController';
 import Authentication from '../middlewares/Authentication';
 import Validate from '../middlewares/inputValidation';
 
@@ -34,5 +35,7 @@ router.get('/:categoryId/recipe/:recipeId', validateCategoryId,
 
 router.get('/:categoryId/recipe', validateCategoryId,
   validateRecipeId, getAllRecipes);
+
+router.post('/:recipeId/cart', validateRecipeId, CartController.addRecipeToCart);
 
 export default router;

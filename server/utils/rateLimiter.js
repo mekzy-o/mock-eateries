@@ -5,6 +5,7 @@ import moment from 'moment';
 import uuid from 'uuid/v4';
 import redis from 'redis';
 import connectRedis from 'connect-redis';
+import logger from '../logger';
 import ServerResponse from './responseHandler';
 
 config();
@@ -14,11 +15,17 @@ const redisCache = connectRedis(session);
 const client = redis.createClient(process.env.REDIS_URL);
 
 client.on('connect', () => {
-  console.log('Redis client has connected successfully');
+  logger.log({
+    level: 'info',
+    message: 'Redis client has connected successfully',
+  });
 });
 
 client.on('error', (error) => {
-  console.log(`Something went wrong ${error}, please try again later`);
+  logger.log({
+    level: 'info',
+    message: `Something went wrong ${error}, please try again later`,
+  });
 });
 
 export const rateLimiter = async (req, res, next) => {
