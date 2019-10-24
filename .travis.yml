@@ -1,0 +1,12 @@
+language: node_js
+node_js:
+  - 'stable'
+install: npm install
+services:
+  - postgresql
+  - redis-server
+script: npm test
+before_script:
+  - psql -c 'create database mock-eateries;' -U postgres
+after_success:
+  - 'npm run coverage'
