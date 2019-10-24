@@ -28,8 +28,11 @@ class CategoryController {
         categoryName,
         description,
       };
+      const existingCategory = await Categories.findOne({ where: { categoryName } });
+      if (existingCategory) {
+        return errorResponse(res, 409, { category: 'This category already exists' });
+      }
       const createdCategory = await Categories.create(newCategory);
-
       return successResponse(
         res,
         201,

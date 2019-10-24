@@ -145,6 +145,29 @@ class RecipeController {
       return next(err);
     }
   }
+
+  /**
+   * get A recipe
+   * @param {object} req
+   * @param {object} res
+   * @returns {object} recipe object
+   */
+  static async getAllRecipes(req, res, next) {
+    try {
+      const { categoryId } = req.params;
+
+      const checkCategoryExists = await Categories.findOne({ where: { id: categoryId } });
+      if (!checkCategoryExists) {
+        return errorResponse(res, 404, 'This category was not found in the database');
+      }
+
+      const getAllRecipe = await Recipes.findAll({ where: { id: categoryId } });
+
+      return successResponse(res, 201, 'Recipe', getAllRecipe);
+    } catch (err) {
+      return next(err);
+    }
+  }
 }
 
 export default RecipeController;

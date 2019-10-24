@@ -6,7 +6,7 @@ import Validate from '../middlewares/inputValidation';
 const router = Router();
 
 const {
-  createRecipe, editRecipe, deleteRecipe, getRecipe,
+  createRecipe, editRecipe, deleteRecipe, getRecipe, getAllRecipes,
 } = RecipeController;
 const { validateCategoryId, validateRecipeId, validateRecipeInput } = Validate;
 const { verifyAdmin } = Authentication;
@@ -31,5 +31,8 @@ router.delete(
 
 router.get('/:categoryId/recipe/:recipeId', validateCategoryId,
   validateRecipeId, getRecipe);
+
+router.get('/:categoryId/recipe', validateCategoryId,
+  validateRecipeId, getAllRecipes);
 
 export default router;
