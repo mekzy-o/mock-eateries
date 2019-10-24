@@ -39,7 +39,7 @@ class RecipeController {
   }
 
   /**
-   * Create A recipe
+   * Edit A recipe
    * @param {object} req
    * @param {object} res
    * @returns {object} recipe object
@@ -83,7 +83,7 @@ class RecipeController {
   }
 
   /**
-   * Create A recipe
+   * delete A recipe
    * @param {object} req
    * @param {object} res
    * @returns {object} recipe object
@@ -122,7 +122,7 @@ class RecipeController {
   }
 
   /**
-   * Create A recipe
+   * get A recipe
    * @param {object} req
    * @param {object} res
    * @returns {object} recipe object

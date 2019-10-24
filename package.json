@@ -4,14 +4,16 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "cross-env NODE_ENV=test jest --testTimeout=10000 --forceExit",
+    "pretest": "cross-env NODE_ENV=test npm run reset:db",
     "start": "babel-node server/app.js",
     "start:dev": "nodemon --exec babel-node server/app.js",
     "migrate": "sequelize db:migrate",
     "migrate:undo": "sequelize db:migrate:undo:all",
     "seedall": "sequelize db:seed:all",
     "reset:db": "npm run migrate:undo && npm run migrate && npm run seedall",
-    "heroku-postbuild": "npm run migrate"
+    "heroku-postbuild": "npm run migrate",
+    "coverage": "npm run pretest && jest --coverage && cat ./coverage/lcov.info | coveralls"
   },
   "repository": {
     "type": "git",
@@ -22,6 +24,13 @@
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/mekzy-o/prunedge-interview/issues"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ],
+    "verbose": true
   },
   "homepage": "https://github.com/mekzy-o/prunedge-interview#readme",
   "dependencies": {
@@ -54,9 +63,13 @@
     "@babel/node": "^7.6.3",
     "@babel/preset-env": "^7.6.3",
     "@babel/register": "^7.6.2",
+    "coveralls": "^3.0.7",
+    "cross-env": "^6.0.3",
     "eslint": "^6.5.1",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.18.2",
-    "nodemon": "^1.19.4"
+    "jest": "^24.9.0",
+    "nodemon": "^1.19.4",
+    "supertest": "^4.0.2"
   }
 }
