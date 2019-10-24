@@ -1,12 +1,12 @@
 export const signUpUser = {
   name: 'Emeka',
-  email: 'emekaofe@gmail.com',
+  email: 'Daniel10@gmail.com',
   password: 'Password1',
 };
 
 export const loginUser = {
-  email: 'emekaofe@gmail.com',
-  password: 'Password1',
+  email: 'admin@eatery.com',
+  password: 'admin',
 };
 
 export const undefinedName = {

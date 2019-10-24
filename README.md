@@ -37,6 +37,7 @@ The API endpoints are documented using POSTMAN and can be accessed here [API-Doc
 - Admin can delete a recipe under a category
 - Users can view a single recipe under a category
 - Users can view all recipe under a category
+- Users can add recipe under a category to cart
 - Public users can perform robust search of recipe or categories
 
 # Technologies
@@ -99,7 +100,7 @@ To run test cases
 | /api/v1/category/:categoryId/recipe              |  Get all Recipes under a category   |         GET |
 | /api/v1/search?keyword='keyword'&filter=recipe   | Search for recipes using a keyword  |         GET |
 | /api/v1/search?keyword='keyword'&filter=category | Search for category using a keyword |         GET |
-
+| /api/v1/category/:recipeId/cart                  |         Add Recipe to Cart          |        POST |
 
 ## License :boom:
 

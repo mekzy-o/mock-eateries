@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 import request from 'supertest';
-import app from '../server/app';
+import app from '../app';
 import {
   signUpUser, invalidLogin, loginUser, undefinedEmail, undefinedName, undefinedPassword, invalidPassword,
 } from './mockData/mockUsers';
