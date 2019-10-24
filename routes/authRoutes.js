@@ -8,12 +8,14 @@ config();
 
 const {
   registerUSer,
+  registerAdmin,
   userSignin,
 } = AuthController;
 
 const router = Router();
 
 router.post('/signup', Validate.signup, registerUSer);
+router.post('/admin/signup', Validate.signup, registerAdmin);
 router.post('/signin', Validate.signin, userSignin);
 
 export default router;
