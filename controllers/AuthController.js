@@ -58,6 +58,49 @@ export default class AuthController {
   /**
    *
    * @static
+   *
+   * @param {object} req express request object
+   * @param {object} res express response object
+   * @param {function} next
+   *
+   * @returns {object} returns user data
+   *
+   * @memberof AuthController
+   */
+  static async registerAdmin(req, res, next) {
+    try {
+      const { name, email, password } = req.body;
+      const foundUser = await User.findOne({ where: { email } });
+      if (foundUser) {
+        return errorResponse(res, 409, { message: 'This User already exist' });
+      }
+      const hashedPassword = Helper.hashPassword(password);
+      const user = {
+        name,
+        email,
+        password: hashedPassword,
+        isAdmin: true,
+      };
+      const createUser = await User.create(user);
+
+      const token = Helper.createToken({
+        id: createUser.id,
+        name: createUser.name,
+        email: createUser.email,
+        isAdmin: createUser.isAdmin,
+      });
+      return successResponse(res, 201, 'user', {
+        message: 'Account has been created successfully!',
+        token,
+      });
+    } catch (err) {
+      return next(err);
+    }
+  }
+
+  /**
+   *
+   * @static
    * @param {object} req express request object
    * @param {object} res express response object
    * @param {function} next
