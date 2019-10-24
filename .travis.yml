@@ -1,0 +1,19 @@
+language: node_js
+node_js:
+  - 'stable'
+env:
+  global:
+  - export NODE_ENV=test
+install: npm install
+services:
+  - postgresql
+  - redis-server
+cache:
+  directories:
+    - node_modules
+script: npm test
+before_script:
+  - psql -c "CREATE DATABASE travis_test_ci;" -U postgres
+  - psql -c "CREATE USER emeka WITH PASSWORD 'password';" -U postgres
+after_success:
+  - 'npm run coverage'
