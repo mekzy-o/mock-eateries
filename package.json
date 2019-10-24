@@ -4,6 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
+
     "test": "cross-env NODE_ENV=test jest --testTimeout=10000 --forceExit",
     "pretest": "cross-env NODE_ENV=test npm run reset:db",
     "start": "babel-node server/app.js",
